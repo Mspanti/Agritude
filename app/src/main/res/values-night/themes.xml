@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AgriTude.Dark" parent="android:Theme.Material.NoActionBar">
+        <!-- Customize your dark theme here. -->
+
+        <item name="android:statusBarColor">@color/primary_container_dark</item>
+        <item name="android:background">@color/background_dark</item>
+    </style>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AgriTude" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="android:statusBarColor">@color/primary_container_light</item>
+        <item name="android:background">@color/background_light</item>
+    </style>
+
+</resources>
