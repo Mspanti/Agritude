@@ -5,13 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// This abstract class defines the main database and the list of entities and DAOs.
-// It is the entry point for all database operations.
-@Database(entities = [MessageEntity::class], version = 1, exportSchema = false)
+// This is the updated database class. It includes the new UserEntity.
+@Database(entities = [MessageEntity::class, UserEntity::class], version = 2, exportSchema = false)
 abstract class AgriTudeDatabase : RoomDatabase() {
 
     // The DAO for the MessageEntity.
     abstract fun messageDao(): MessageDao
+
+    // The new DAO for the UserEntity.
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
@@ -25,6 +27,7 @@ abstract class AgriTudeDatabase : RoomDatabase() {
                     AgriTudeDatabase::class.java,
                     "agritude_database"
                 )
+                    // This will clear all data on schema changes, which is what we need to fix the KSP error.
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

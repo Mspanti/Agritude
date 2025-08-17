@@ -1,33 +1,62 @@
-// MainActivity.kt
 package com.pant.agritude
 
+
+
+import android.app.Application
+
 import android.os.Bundle
+
 import android.util.Log
+
 import androidx.activity.ComponentActivity
+
 import androidx.activity.compose.setContent
+
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.material.icons.Icons
+
 import androidx.compose.material.icons.filled.*
+
 import androidx.compose.material3.*
+
 import androidx.compose.runtime.*
+
 import androidx.compose.ui.Modifier
+
 import androidx.compose.ui.tooling.preview.Preview
+
 import androidx.lifecycle.lifecycleScope
+
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavController
+
 import androidx.navigation.NavHostController
+
 import androidx.navigation.compose.NavHost
+
 import androidx.navigation.compose.composable
+
 import androidx.navigation.compose.currentBackStackEntryAsState
+
 import androidx.navigation.compose.rememberNavController
+
 import androidx.room.Room
-import com.pant.agritude.MessageDao
-import com.pant.agritude.MessageEntity
+
+import com.pant.agritude.chatscreen.ChatScreen
+
 import com.pant.agritude.ui.theme.AgriTudeTheme
+
 import kotlinx.coroutines.flow.Flow
+
+import kotlinx.coroutines.flow.flowOf
+
 import kotlinx.coroutines.launch
+
 import java.util.Locale
 
-// Routes for navigation.
+// Navigation routes for the app.
 object AgriTudeDestinations {
     const val CHAT = "chat"
     const val DASHBOARD = "dashboard"
@@ -38,31 +67,30 @@ object AgriTudeDestinations {
 
 // MainActivity is the main entry point of the app.
 class MainActivity : ComponentActivity() {
-    override fun onCreate(saved: Bundle?) {
-        super.onCreate(saved)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        // API Service initialization
         val apiService = RetrofitClient.apiService
 
+        // Room Database initialization
         val database = Room.databaseBuilder(
             applicationContext,
             AgriTudeDatabase::class.java, "agritude_database"
         ).build()
 
-        val repository = AgriTudeRepository(database.messageDao(), apiService)
+        // Repository initialization
+        val repository = AgriTudeRepository(database.messageDao(), database.userDao(), apiService)
 
-        // API அழைப்பு சரியாக வேலை செய்கிறதா என்று சோதிக்க ஒரு எடுத்துக்காட்டு.
+        // API Call test example
         lifecycleScope.launch {
             try {
                 val filters = mapOf("filters[state]" to "Tamil Nadu")
-                // getMandiPrices என மாற்றப்பட்டுள்ளது
                 val response = apiService.getMandiPrices(
                     apiKey = "579b464db66ec23bdd000001da78fa78988a42c75a8cf43773001557",
                     filters = filters
                 )
                 Log.d("API_CALL", "Success: ${response.body()?.records?.size} records found.")
-                response.body()?.records?.forEach { record ->
-                    Log.d("API_CALL", "Commodity: ${record.commodity}, Price: ${record.price}")
-                }
             } catch (e: Exception) {
                 Log.e("API_CALL", "Error fetching data: ${e.message}", e)
             }
@@ -79,7 +107,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    AgriTudeApp(navController, currentLanguage, repository) {
+                    AgriTudeApp(application, navController, currentLanguage, repository) {
                         currentLanguage = if (currentLanguage == Strings.tamil) Strings.english else Strings.tamil
                     }
                 }
@@ -88,9 +116,25 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// A Factory class to handle ViewModel with Application and Repository dependency.
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgriTudeApp(navController: NavHostController, currentLanguage: AppStrings, repository: AgriTudeRepository, onLanguageToggle: () -> Unit) {
+fun AgriTudeApp(
+    application: Application,
+    navController: NavHostController,
+    currentLanguage: AppStrings,
+    repository: AgriTudeRepository,
+    onLanguageToggle: () -> Unit
+) {
+    val chatViewModel: ChatScreenViewModel = viewModel(
+        factory = ChatViewModelFactory(application = application)
+    )
+
+    val dashboardViewModel: DashboardViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = DashboardViewModelFactory(repository))
+    val profileViewModel: ProfileViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = ProfileViewModelFactory(repository))
+    val settingsViewModel: SettingsViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -125,15 +169,12 @@ fun AgriTudeApp(navController: NavHostController, currentLanguage: AppStrings, r
             AgriTudeBottomNavigation(navController, currentLanguage)
         }
     ) { innerPadding ->
-        val chatViewModel: ChatScreenViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = ChatViewModelFactory(repository))
-        val dashboardViewModel: DashboardViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = DashboardViewModelFactory(repository))
-
         NavHost(navController = navController, startDestination = AgriTudeDestinations.CHAT, modifier = Modifier.padding(innerPadding)) {
             composable(AgriTudeDestinations.CHAT) { ChatScreen(currentLanguage, chatViewModel) }
             composable(AgriTudeDestinations.DASHBOARD) { DashboardScreen(currentLanguage, dashboardViewModel) }
             composable(AgriTudeDestinations.STORIES) { StoriesScreen(currentLanguage) }
-            composable(AgriTudeDestinations.PROFILE) { ProfileScreen(currentLanguage) }
-            composable(AgriTudeDestinations.SETTINGS) { SettingsScreen(currentLanguage, onLanguageToggle) }
+            composable(AgriTudeDestinations.PROFILE) { ProfileScreen(currentLanguage, profileViewModel) }
+            composable(AgriTudeDestinations.SETTINGS) { SettingsScreen(currentLanguage, settingsViewModel, onLanguageToggle) }
         }
     }
 }
@@ -175,14 +216,23 @@ fun AgriTudeBottomNavigation(navController: NavController, strings: AppStrings) 
 fun AgriTudeAppPreview() {
     AgriTudeTheme {
         val navController = rememberNavController()
-        val mockApiService = MockAgriTudeApiService()
+        val apiService = RetrofitClient.apiService
         val emptyRepo = AgriTudeRepository(
             messageDao = object : MessageDao {
-                override fun getAllMessages(): Flow<List<MessageEntity>> = kotlinx.coroutines.flow.flowOf(emptyList())
-                override suspend fun insert(message: MessageEntity) {}
+                override fun getAllMessages(): Flow<List<MessageEntity>> = flowOf(emptyList())
+                override suspend fun insert(message: MessageEntity): Long {
+                    return 0L
+                }
+                override suspend fun update(message: MessageEntity) {}
+                override suspend fun deleteAll() {}
             },
-            apiService = mockApiService
+            userDao = object : UserDao {
+                override suspend fun insert(user: UserEntity) {}
+                override fun getUser(): Flow<UserEntity?> = flowOf(null)
+            },
+            apiService = apiService
         )
-        AgriTudeApp(navController, Strings.tamil, emptyRepo) {}
+        val application = android.app.Application()
+        AgriTudeApp(application, navController, Strings.tamil, emptyRepo) {}
     }
 }

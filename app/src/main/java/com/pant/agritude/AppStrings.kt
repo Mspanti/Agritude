@@ -43,7 +43,27 @@ data class AppStrings(
     val priceTrend: String,
     val averagePrice: String,
     val currency: String,
-    val market: String
+    val market: String,
+    val weatherAlert: String,
+    val dummyWeatherAlert: String,
+    val voiceInput: String,
+    val attachFile: String,
+    val speechToTextPrompt: String,
+    val tomatoPrice: String,
+    val onionPrice: String,
+    val weatherTitle: String,
+    // New strings added for ChatScreen features
+    val chatHistory: String,
+    val deleteHistory: String,
+    val listening: String,
+    val enterMessage: String,
+    val send: String,
+    val deleteChatHistory: String,
+    val deleteConfirmation: String,
+    val delete: String,
+    val llmGenerating: String,
+    val cancel: String,
+    val askQuestion:String
 )
 
 // A simple object to provide strings in different languages.
@@ -55,6 +75,7 @@ object Strings {
         tabStories = "Stories",
         settings = "Settings",
         profile = "Profile",
+        llmGenerating = "Generating response...",
         greeting = "Hello! I'm AgriTude, your farming assistant. How can I help you today?",
         chatInputLabel = "Ask me anything about farming...",
         chatSendButton = "Send message",
@@ -90,7 +111,26 @@ object Strings {
         priceTrend = "Price Trend Chart Placeholder",
         averagePrice = "Avg Price",
         currency = "₹/kg",
-        market = "Market"
+        market = "Market",
+        weatherAlert = "Weather Alert",
+        dummyWeatherAlert = "Heavy rains expected in your area. Take necessary precautions to protect your crops.",
+        voiceInput = "Voice input",
+        attachFile = "Attach file",
+        speechToTextPrompt = "Speak now...",
+        tomatoPrice = "Tomato: ₹30 - ₹60 / kg",
+        onionPrice = "Onion: ₹20 - ₹40 / kg",
+        weatherTitle = "Weather",
+        // New strings
+        chatHistory = "Chat History",
+        deleteHistory = "Delete History",
+        listening = "Listening...",
+        enterMessage = "Enter your message",
+        send = "Send",
+        deleteChatHistory = "Delete Chat History",
+        deleteConfirmation = "Are you sure you want to delete chat history?",
+        delete = "Delete",
+        cancel = "Cancel",
+        askQuestion = "askQuestion"
     )
 
     val tamil = AppStrings(
@@ -125,6 +165,7 @@ object Strings {
         readStoryButton = "இந்த கதையை உங்கள் பண்ணைக்கு எப்படிப் பயன்படுத்துவது என்று அக்ரிடியூட்டிடம் கேளுங்கள்",
         profileTitle = "பயனர் சுயவிவரம்",
         profileName = "பயனர்பெயர்: ஜான் டோ",
+        llmGenerating = "பதில் உருவாக்கப்படுகிறது...",
         profileLocation = "இடம்: சென்னை, தமிழ்நாடு",
         profileFarmSize = "பண்ணையின் அளவு: 5 ஏக்கர்",
         settingsTitle = "அமைப்புகள்",
@@ -135,6 +176,25 @@ object Strings {
         priceTrend = "விலை போக்கு விளக்கப்படம்",
         averagePrice = "சராசரி விலை",
         currency = "₹/kg",
-        market = "சந்தை"
+        market = "சந்தை",
+        weatherAlert = "வானிலை எச்சரிக்கை",
+        dummyWeatherAlert = "உங்கள் பகுதியில் கனமழை எதிர்பார்க்கப்படுகிறது. பயிர்களை பாதுகாக்க தேவையான முன்னெச்சரிக்கை நடவடிக்கைகளை மேற்கொள்ளவும்.",
+        voiceInput = "குரல் உள்ளீடு",
+        attachFile = "கோப்பை இணை",
+        speechToTextPrompt = "இப்போது பேசுங்கள்...",
+        tomatoPrice = "தக்காளி: ₹30 - ₹60 / கிலோ",
+        onionPrice = "வெங்காயம்: ₹20 - ₹40 / கிலோ",
+        weatherTitle = "வானிலை",
+        // New strings
+        chatHistory = "சாட் வரலாறு",
+        deleteHistory = "வரலாற்றை நீக்கு",
+        listening = "கேட்டுக்கொண்டிருக்கிறது...",
+        enterMessage = "உங்கள் செய்தியை உள்ளிடவும்",
+        send = "அனுப்பு",
+        deleteChatHistory = "சாட் வரலாற்றை நீக்கு",
+        deleteConfirmation = "உறுதியாக சாட் வரலாற்றை நீக்க விரும்புகிறீர்களா?",
+        delete = "நீக்கு",
+        cancel = "ரத்து செய்",
+        askQuestion = "கேள்வி கேட்கவும்..."
     )
 }

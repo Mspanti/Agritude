@@ -1,15 +1,17 @@
-// ApriTudeApiService.kt
 package com.pant.agritude
 
-import com.pant.agritude.data.MarketDataResponse // MarketDataResponse-ஐ இறக்குமதி செய்கிறது
+import com.pant.agritude.data.MarketDataResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
+import com.pant.agritude.gemini.GeminiRequest
+import com.pant.agritude.gemini.GeminiResponse
+import retrofit2.http.Body
+import retrofit2.http.POST
 
-// API response data class (இந்த class-ஐ இங்கு மட்டும் வைத்திருக்கிறோம்)
 data class MandiPriceData(
     val records: List<Record>
 )
@@ -34,7 +36,15 @@ interface AgriTudeApiService {
         @Query("format") format: String = "json",
         @Query("limit") limit: Int = 10,
         @QueryMap filters: Map<String, String>
-    ): Response<MarketDataResponse> // <MarketDataResponse> என மாற்றப்பட்டுள்ளது
+    ): Response<MarketDataResponse>
+
+    // Gemini API-க்கான புதிய POST முறை
+    // Here we add the 'key' parameter to send the API key with the request.
+    @POST("v1beta/models/gemini-pro:generateContent")
+    suspend fun generateContent(
+        @Body request: GeminiRequest,
+        @Query("key") apiKey: String // <-- இங்கு ஏபிஐ கீ சேர்க்கப்பட்டுள்ளது
+    ): GeminiResponse
 }
 
 // Retrofit Client to make API calls (இங்கு மட்டும் வைத்திருக்கிறோம்)
