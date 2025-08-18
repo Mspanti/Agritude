@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soundarapandiyan | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="glass-header">
-    <h1>👋 Hi, I'm Soundarapandiyan</h1>
-    <p><span id="typing"></span></p>
-  </header>
+<!-- README.md -->
 
-  <section class="about">
-    <h2>About Me</h2>
-    <p>Persistent developer blending tech with creativity. Expert in Python, ML, and bilingual tech storytelling.</p>
-  </section>
+<h1 align="center">🌾 AgriTude</h1>
+<p align="center"><em>AI-powered agricultural advisor for real-world decision making</em></p>
 
-  <section class="projects">
-    <h2>Featured Projects</h2>
-    <div class="card">
-      <h3>AgriTude 🌾</h3>
-      <p>Hackathon-winning AI tool for farmers. Includes demo, architecture, and impact story.</p>
-      <a href="https://github.com/yourusername/agritude">View on GitHub</a>
-    </div>
-  </section>
+---
 
-  <footer>
-    <p>📫 Reach me at: soundara@example.com</p>
-  </footer>
+<h2>🚀 Overview</h2>
+<p>
+AgriTude is a multilingual, offline-first AI solution designed to empower farmers, vendors, and agri-financiers across India. Built for real-world constraints like low internet access and high decision responsibility, AgriTude delivers trustworthy insights on crop health, irrigation, market trends, and government schemes.
+</p>
 
-  <script src="typing.js"></script>
-</body>
-</html>
+---
+
+<h2>🧠 Key Features</h2>
+<ul>
+  <li><strong>Voice & Text Input</strong>: Tamil-English bilingual support</li>
+  <li><strong>Offline AI Models</strong>: Crop prediction, financial reasoning, irrigation advice</li>
+  <li><strong>Weather & Market Insights</strong>: Cached data + real-time fallback</li>
+  <li><strong>Explainable Outputs</strong>: Confidence scores, source references</li>
+  <li><strong>Modular Architecture</strong>: Easily extendable for new crops, regions, or policies</li>
+</ul>
+
+---
+
+<h2>🏗️ Architecture</h2>
+
