@@ -30,7 +30,7 @@ data class Record(
 
 // Retrofit Interface for the API
 interface AgriTudeApiService {
-    @GET("resource/9ef84268-d588-465a-a308-a864a43d0070")
+    @GET("resource/")
     suspend fun getMandiPrices(
         @Query("api-key") apiKey: String,
         @Query("format") format: String = "json",
