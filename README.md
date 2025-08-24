@@ -1,61 +1,74 @@
-🌾 AgriDosth – Agentic AI for Farmers
-An offline-first, privacy-respecting AI advisor designed to empower Indian farmers with financial and agricultural insights.
+# 🌾 AgriDosth – Agentic AI for Farmers
 
-👥 Team Details
-Team Name: Agri_Dosth
+> 🧑🏽‍🌾 *“Ungal thozhan, ungal thunai.”*  
+> Your offline-first, privacy-respecting AI companion for financial and agricultural empowerment.
 
-Team Member: Soundarapandiyan M
+---
 
-🌱 Theme
-Agriculture Vertical – Financial Needs of Farmers Bridging the gap between farming effort and financial outcome through narrative-driven, multi-modal advisory.
+## 🧠 What is AgriDosth?
 
-🧠 Solution Overview
-AgriDosth is a human-aligned Agentic AI model that:
+AgriDosth is a human-aligned Agentic AI system crafted for Indian farmers. It transforms raw data into **story-style guidance**, integrates **soil, water, and climate intelligence**, and works **offline** with SMS/IVR support for low-tech users.
 
-Converts raw data into story-style guidance
+---
 
-Integrates soil, water, and climate data for personalized advice
+## 🛠️ Tech Stack
 
-Functions offline on Android, with SMS/IVR support for low-tech users
+| Layer         | Tech Used                                                                 |
+|--------------|---------------------------------------------------------------------------|
+| 📱 Mobile     | Kotlin (Android native)                                                  |
+| 🧠 Agentic AI | TensorFlow Lite / ONNX (offline) + Cloud LLM (reasoning)                 |
+| 🗃️ Data       | Room DB (local) + Firebase (sync & cloud services)                       |
+| 🔐 Security   | AES-256 encryption for user and financial data                           |
+| 🌐 Datasets   | Data.gov.in, TNAU Agritech, eNAM, AGMARKNET, IMD                         |
 
-🛠️ Tech Stack
-Mobile App: Kotlin (Android native) Agentic Core: TensorFlow Lite / ONNX (offline) + Cloud LLM (reasoning) Data Layer: Room DB (local) + Firebase (sync & cloud services) Security: AES-256 encryption for user and financial data Datasets: Data.gov.in, TNAU Agritech, eNAM, AGMARKNET, IMD
+---
 
-📊 Decision Rationale
-Offline-first AI for rural connectivity challenges
+## 📊 Why This Matters
 
-Kotlin for performance and developer efficiency
+- 🌐 **Offline-first**: Designed for rural connectivity gaps  
+- 🧑🏽‍💻 **Kotlin-native**: Fast, efficient, and scalable  
+- 📞 **Multi-modal UX**: SMS, IVR, and visuals for low digital literacy  
+- 🔒 **Trust-first design**: AES-256 encryption for sensitive data
 
-Multi-modal interface (SMS, IVR, visuals) for low digital literacy
+---
 
-AES-256 encryption to build trust with sensitive financial data
+## 🚀 Innovation Highlights
 
-🚀 Innovation Highlights
-Narrative-driven financial advisor
+✨ **Narrative-driven financial guidance**  
+📊 **Visual storytelling**: Infographics, graphs, short videos  
+🧬 **Deep-domain reasoning**: Soil, crop, price, subsidy  
+🤝 **Agri-trade agent**: Community-level price negotiation
 
-Visual communication via infographics, graphs, and short videos
+---
 
-Deep-domain reasoning across soil, crop, price, and subsidy data
+## ✅ Feasibility & Impact
 
-Proactive agri-trade agent for community-level price negotiation
+- 🧪 Proven offline AI experience  
+- 🧭 Intuitive multi-modal UX  
+- 🛡️ Strong security foundation  
+- 🧾 Validated demo with mock data
 
-✅ Feasibility & Impact
-Proven offline AI experience
+---
 
-Intuitive multi-modal UX
+## 📈 Success Metrics
 
-Strong security foundation
+| Metric                     | Goal                             |
+|---------------------------|----------------------------------|
+| 💰 Farmer Net Profit       | Increase via smarter decisions   |
+| 📲 User Adoption           | Growth across regions            |
+| 🗣️ Communication Clarity   | Feedback-driven improvements     |
 
-Validated demo with mock data
+---
 
-📈 Success Metrics
-Increase in farmer net profit
+## 🧬 Architecture Highlights
 
-User adoption & engagement
+mermaid
+graph TD
+  A[DashboardViewModel] --> B[Market Forecasts]
+  A --> C[Weather Updates]
+  A --> D[Govt Schemes]
+  E[ChatViewModel] --> F[Agentic Simulation]
+  F --> G[Context-Aware Responses] '''
+Demo:Screen Shots
 
-Clarity of communication via feedback
-
-🧬 Architecture Diagram (Demo Highlights)
-DashboardViewModel: Market forecasts, weather, schemes
-
-ChatViewModel: Agentic simulation with context-aware responses
+<table> <tr> <td><img src="https://github.com/user-attachments/assets/b8fe40cc-9034-43ec-b82a-64af725a1816" width="250"/></td> <td><img src="https://github.com/user-attachments/assets/abbe99ff-e0e5-4c6a-b5c5-a66f36896a66" width="250"/></td> </tr> <tr> <td><img src="https://github.com/user-attachments/assets/b7487b7a-6f0b-4a54-8903-7809337b6ddf" width="250"/></td> <td><img src="https://github.com/user-attachments/assets/cafbab52-646f-47e2-9b3e-68cf2c9e21cb" width="250"/></td> </tr> </table>
