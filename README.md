@@ -70,7 +70,6 @@ graph TD
   E[ChatViewModel] --> F[Agentic Simulation]
   F --> G[Context-Aware Responses] '''
 Demo:Screen Shots
+<table> <tr> <td><img src="https://github.com/user-attachments/assets/903ed902-c202-46b2-abaa-77a3cd0de751" width="250"/></td> <td><img src="https://github.com/user-attachments/assets/cb6ec926-f904-4efd-a6e8-54709b42eb83" width="250"/></td> </tr> <tr> <td><img src="https://github.com/user-attachments/assets/10c5b554-71f7-4a53-8255-00e0959d2def" width="250"/></td> <td><img src="https://github.com/user-attachments/assets/79c18734-54b6-4a18-b191-0b2b15d279dd" width="250"/></td> </tr> </table>
 
-<table> <tr> <td><img src="https://github.com/user-attachments/assets/b8fe40cc-9034-43ec-b82a-64af725a1816" width="250"/></td> <td>
-<img src="https://github.com/user-attachments/assets/fb8416e9-d3fe-48c5-9826-b7db2e45cdb7" width ="250"/></td> </tr> <tr> <td><img src="https://github.com/user-attachments/assets/b7487b7a-6f0b-4a54-8903-7809337b6ddf" width="250"/></td> <td><img src="https://github.com/user-attachments/assets/cafbab52-646f-47e2-9b3e-68cf2c9e21cb" width="250"/></td> </tr> </table>
 
